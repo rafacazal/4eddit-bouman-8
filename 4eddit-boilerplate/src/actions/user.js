@@ -1,6 +1,7 @@
 import axios from "axios";
-// import { push } from "connected-react-router";
-// import { routes } from "../containers/Router"
+import { push } from "connected-react-router";
+import { routes } from "../containers/Router";
+
 
 
 
@@ -16,7 +17,7 @@ export const autenticateLogin = (email, password) => async (dispatch) => {
         const userToken = response.data.token;
         window.localStorage.setItem("token", userToken);
         
-        // dispatch(push(routes.)); Dar dispatch para a próxima página de posts.
+        dispatch(push(routes.feed))
 
     } catch(error) {
         window.alert("Ocorreu um erro ao tentar fazer login!")
@@ -36,7 +37,7 @@ export const createUser = (email, password, username) => async (dispatch) => {
         const userToken = response.data.token;
         window.localStorage.setItem("token", userToken);
         
-        // dispatch(push(routes.)); Dar dispatch para a próxima página de posts.
+        dispatch(push(routes.feed))
 
         window.alert("registro realizado!")
     } catch(error) {

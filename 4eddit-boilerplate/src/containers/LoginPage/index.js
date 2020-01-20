@@ -7,9 +7,8 @@ const loginForm = [
   {
     name: "email",
     type: "email",
-    label: "Email - Admin",
-    required: true,
-    pattern: "[A-Za-^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$]{3,}"
+    label: "Email ",
+    required: true
   },
   {
     name: "password",
@@ -63,6 +62,7 @@ class LoginPage extends Component {
 
 
 const mapDispatchToProps = dispatch => ({
+
   autenticateLogin: (email, password) => dispatch(autenticateLogin(email, password)),
 })
 
