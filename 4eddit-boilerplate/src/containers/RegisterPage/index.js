@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { autenticateLogin } from "../../actions/user"
+import { createUser } from "../../actions/user"
 
 
-const loginForm = [
+const registerForm = [
+  {
+    name: "username",
+    type: "text",
+    label: "Nome de Usuário",
+    required: true,
+    pattern: "[A-Za-z0-9]"
+  },
   {
     name: "email",
     type: "email",
@@ -19,7 +26,7 @@ const loginForm = [
   }
 ]
 
-class LoginPage extends Component {
+class RegisterPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,17 +40,17 @@ class LoginPage extends Component {
     this.setState({ form: { ...this.state.form, [name]: value } });
   };
 
-  sendLoginData = (event) => {
+  sendRegisterData = (event) => {
     event.preventDefault()
-    const { email, password} = this.state.form
-    this.props.autenticateLogin(email, password)
+    const { email, password, username} = this.state.form
+    this.props.createUser(email, password, username)
   }
 
   render() {
     return (
       <div>
-          <form onSubmit={this.sendLoginData}>
-            {loginForm.map( input => (
+          <form onSubmit={this.sendRegisterData}>
+            {registerForm.map( input => (
               <div key={input.name}>
                 <input
                 onChange={this.handleFieldChange}
@@ -54,7 +61,7 @@ class LoginPage extends Component {
                 />
               </div>
             ))}
-            <button type="submit" color="primary" size="large" onClick={this.sendLoginData}>Login</button>
+            <button type="submit" color="primary" size="large" onClick={this.sendRegisterData}>Login</button>
           </form>
       </div>
     );
@@ -63,8 +70,8 @@ class LoginPage extends Component {
 
 
 const mapDispatchToProps = dispatch => ({
-  autenticateLogin: (email, password) => dispatch(autenticateLogin(email, password)),
+    createUser: (email, password, username) => dispatch(createUser(email, password, username)),
 })
 
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(null, mapDispatchToProps)(RegisterPage);
