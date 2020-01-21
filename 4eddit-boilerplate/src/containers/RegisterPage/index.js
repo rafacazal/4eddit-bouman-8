@@ -44,6 +44,7 @@ class RegisterPage extends Component {
     event.preventDefault()
     const { email, password, username} = this.state.form
     this.props.createUser(email, password, username)
+    this.setState({form: {}})
   }
 
   render() {

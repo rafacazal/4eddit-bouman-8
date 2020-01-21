@@ -10,7 +10,7 @@ const ContainerFormCard = styled.div`
 
 function PostCard(props) {
     return (
-        <ContainerFormCard>
+        <ContainerFormCard onClick={props.onClick}>
             {props.children}
         </ContainerFormCard>
     );
