@@ -36,6 +36,7 @@ class LoginPage extends Component {
     event.preventDefault()
     const { email, password} = this.state.form
     this.props.autenticateLogin(email, password)
+    this.setState({form: {}})
   }
 
   render() {
@@ -62,7 +63,6 @@ class LoginPage extends Component {
 
 
 const mapDispatchToProps = dispatch => ({
-
   autenticateLogin: (email, password) => dispatch(autenticateLogin(email, password)),
 })
 
