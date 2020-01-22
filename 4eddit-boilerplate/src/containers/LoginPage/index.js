@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import { autenticateLogin } from "../../actions/user"
 import Header from '../../components/Header';
 import LoginFooter from '../../components/LoginFooter'
-// import { RegisterButton } from '../../style/registerButton'; 
+import { RegisterButton } from '../../style/registerButton'; 
 import { StyledInput, StyledButton  } from '../../style/login';
 import LoginCard from "../../components/LoginCard";
+import { push } from "connected-react-router";
+import { routes } from "../Router/index"
 
 const loginForm = [
   {
@@ -46,7 +48,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <Header/>
+        <Header> <RegisterButton onClick={this.props.goToRegisterPage}/> </Header>
           <LoginCard onSubmit={this.sendLoginData}> 
             {loginForm.map( input => (
               <div key={StyledInput.name}>
@@ -68,9 +70,9 @@ class LoginPage extends Component {
   }
 }
 
-
 const mapDispatchToProps = dispatch => ({
   autenticateLogin: (email, password) => dispatch(autenticateLogin(email, password)),
+  goToRegisterPage: () => dispatch(push(routes.register)),
 })
 
 

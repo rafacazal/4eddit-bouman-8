@@ -53,7 +53,7 @@ class RegisterPage extends Component {
     return (
       <div> 
       <Header/>
-          <RegisterCard  onSubmit={this.sendRegisterData}>
+          <RegisterCard onSubmit={this.sendRegisterData}>
             {registerForm.map( input => (
               <div key={StyledRegisterInput.name}>
                 <input
