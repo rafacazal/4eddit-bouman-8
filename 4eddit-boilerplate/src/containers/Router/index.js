@@ -8,12 +8,12 @@ import PostDetails from "../PostDetails"
 
 
 
+
 export const routes = {
   root: "/",
   feed: "/feed",
   register: "/register",
-  postDetails: "/details"
-  
+  postDetails: "/details",
   // Outras rotas aqui
 };
 

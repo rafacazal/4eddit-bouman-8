@@ -1,24 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createPost, getAllPosts } from "../../actions/post"
-import posts from "../../reducers/posts";
+import { getPostDetails, createComment, votePost, voteComment } from "../../actions/post";
+import  Up  from "../../resources/up.png";
+import  Down  from "../../resources/down.png";
+import { push } from "connected-react-router";
+import { routes } from "../Router/index"
 
-// import { createUser } from "../../actions/user"
-
-
-const feedForm = [
-  {
-    name: "title",
-    type: "text",
-    label: "Título",
-    required: true
-  },
-  {
-    name: "text",
-    type: "text",
-    label: "Escreva seu post",
-    required: true
-  }
+const commentForm = [
+    {
+      name: "text",
+      type: "text",
+      label: "Escreva seu Comentário",
+      required: true
+    }
 ]
 
 class PostsDetails extends Component {
@@ -30,7 +24,12 @@ class PostsDetails extends Component {
   }
 
   componentDidMount() {
-    this.props.getAllPosts()
+    const token = window.localStorage.getItem("token")
+    if (token === null) {
+      this.props.goToLoginPage()
+    }
+
+    this.props.getPostDetails(this.props.selectedPostId)
   }
 
   handleFieldChange = event => {
@@ -39,19 +38,28 @@ class PostsDetails extends Component {
     this.setState({ form: { ...this.state.form, [name]: value } });
   };
 
-  sendPostData = (event) => {
+  sendCommentData = (event) => {
     event.preventDefault()
-    const { title, text } = this.state.form
-    this.props.createPost(title, text)
+    const { text } = this.state.form
+    const { selectedPostId } = this.props
+    this.props.createComment(text, selectedPostId)
+    this.setState({form: {}})
   }
 
-  render() {
 
-    console.log(this.props.allPosts)
+  render() {
+    const {postDetails} = this.props
+
     return (
-      <div>
-          <form onSubmit={this.sendPostData}>
-            {feedForm.map( input => (
+        <div>
+          <p>{postDetails.username}</p>
+          <p>{postDetails.text}</p>
+          <p>{postDetails.commentsNumber}</p>
+          <img  alt={"vote"}  onClick={() => this.props.votePost(+1, postDetails.id)} src={Up} width="20px"/>
+          <p>{postDetails.userVoteDirection}</p>
+          <img  alt={"vote"}  onClick={() => this.props.votePost(-1, postDetails.id)} src={Down} width="20px"/>
+          <form onSubmit={this.sendCommentData}>
+            {commentForm.map( input => (
               <div key={input.name}>
                 <input
                 onChange={this.handleFieldChange}
@@ -62,25 +70,37 @@ class PostsDetails extends Component {
                 />
               </div>
             ))}
-
-            <button type="submit" color="primary" size="large" onClick={this.sendPostData}>Criar post</button>
+            <button type="submit">Comentar</button>
           </form>
-          {/* { this.props.allPosts.map(post => ( <li> {post.title} </li>)) } */}
-
-      </div>
+          
+          {postDetails.comments && postDetails.comments.map( comment => (
+            <div key={comment.id}>
+                <p>{comment.username}</p>
+                <p>{comment.text}</p>
+                <p>{comment.votesCount}</p>
+                <img  alt={"vote"}  onClick={() => this.props.voteComment(+1, this.props.selectedPostId, comment.id)} src={Up} width="20px"/>
+                {/* <p>{comment.userVoteDirection}</p> */}
+                <img  alt={"vote"}  onClick={() => this.props.voteComment(-1, this.props.selectedPostId, comment.id)} src={Down} width="20px"/>
+            </div>
+          ))}
+        </div>
     );
   }
-}
+}   
 
-// const mapStateToProps = state => ({
-//     allPosts: state.posts.allPosts
-//   });
+const mapStateToProps = state => ({
+    selectedPostId: state.posts.selectedPostId,
+    postDetails: state.posts.postDetails,
+});
 
   
 const mapDispatchToProps = dispatch => ({
-    createPost: (title, text ) => dispatch(createPost(title, text )),
-    getAllPosts: () => dispatch(getAllPosts())
+    goToLoginPage: () => dispatch(push(routes.root)),
+    getPostDetails: (postId) => dispatch(getPostDetails(postId)),
+    createComment: (text, postId) => dispatch(createComment(text, postId)),
+    votePost: (direction, postId) => dispatch(votePost(direction, postId)),
+    voteComment: (direction, postId, commentId) => dispatch(voteComment(direction, postId, commentId)),
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Feed);
+export default connect(mapStateToProps, mapDispatchToProps)(PostsDetails);

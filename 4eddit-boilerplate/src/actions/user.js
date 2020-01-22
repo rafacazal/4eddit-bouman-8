@@ -35,7 +35,7 @@ export const createUser = (email, password, username) => async (dispatch) => {
         const response = await axios.post(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/signup`, registerInformation);
 
         const userToken = response.data.token;
-        window.localStorage.setItem("token", userToken);
+        window.localStorage.setItem("token", userToken); 
         
         dispatch(push(routes.feed))
 

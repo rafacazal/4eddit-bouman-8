@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import posts from "../../reducers/posts";
 import PostCard from "../../components/PostCard";
 import  Up  from "../../resources/up.png"
 import  Down  from "../../resources/down.png"
-import { createPost, getAllPosts, votePost } from "../../actions/post"
-
-// import { createUser } from "../../actions/user"
-
+import { createPost, getAllPosts, votePost, setSelectedPostId } from "../../actions/post"
+import { push } from "connected-react-router";
+import { routes } from "../Router/index"
 
 const feedForm = [
   {
@@ -32,8 +30,12 @@ class Feed extends Component {
     };
   }
 
-
   componentDidMount() {
+    const token = window.localStorage.getItem("token")
+    if (token === null) {
+      this.props.goToLoginPage()
+    }
+
     this.props.getAllPosts()
   }
 
@@ -47,11 +49,15 @@ class Feed extends Component {
     event.preventDefault()
     const { title, text } = this.state.form
     this.props.createPost(title, text)
+    this.setState({form: {}})
+  }
+
+  handleClickPost = (postId) => {
+    this.props.setSelectedPostId(postId)
+    this.props.goToPostDetails()
   }
 
   render() {
-
-    console.log(this.props.allPosts)
     return (
       <div>
           <form onSubmit={this.sendPostData}>
@@ -70,29 +76,31 @@ class Feed extends Component {
             <button type="submit" color="primary" size="large" onClick={this.sendPostData}>Criar post</button>
           </form>
 
-          { this.props.allPosts.map(post => ( 
-            
-          <PostCard>
-         <li> {post.title} </li>
-          <img onClick={() => {this.props.votePost(+1, post.id)}} src={Up} width="20px"/>
+        { this.props.allPosts.map(post => ( 
+        <PostCard key={post.id} onClick={() => this.handleClickPost(post.id)}>
+          <li> {post.title} </li>
+          <img  alt={"vote"}  onClick={() => this.props.votePost(+1, post.id)} src={Up} width="20px"/>
           <p>{post.userVoteDirection}</p>
-          <img onClick={() => {this.props.votePost(-1, post.id)}} src={Down} width="20px"/>
-          </PostCard> )) }
-
+          <img alt={"vote"} onClick={() => this.props.votePost(-1, post.id)} src={Down} width="20px"/>
+        </PostCard> 
+        ))}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-    allPosts: state.posts.allPosts
-  });
+  allPosts: state.posts.allPosts
+});
 
   
 const mapDispatchToProps = dispatch => ({
-    createPost: (title, text ) => dispatch(createPost(title, text )),
-    getAllPosts: () => dispatch(getAllPosts()),
-    votePost: (direction, postId) => dispatch(votePost(direction, postId))
+  goToLoginPage: () => dispatch(push(routes.root)),
+  createPost: (title, text ) => dispatch(createPost(title, text )),
+  getAllPosts: () => dispatch(getAllPosts()),
+  votePost: (direction, postId) => dispatch(votePost(direction, postId)),
+  goToPostDetails: () => dispatch(push(routes.postDetails)),
+  setSelectedPostId: (postId) => dispatch(setSelectedPostId(postId))
 })
 
 
