@@ -55,9 +55,9 @@ class PostsDetails extends Component {
           <p>{postDetails.username}</p>
           <p>{postDetails.text}</p>
           <p>{postDetails.commentsNumber}</p>
-          <img onClick={() => this.props.votePost(+1, postDetails.id)} src={Up} width="20px"/>
+          <img  alt={"vote"}  onClick={() => this.props.votePost(+1, postDetails.id)} src={Up} width="20px"/>
           <p>{postDetails.userVoteDirection}</p>
-          <img onClick={() => this.props.votePost(-1, postDetails.id)} src={Down} width="20px"/>
+          <img  alt={"vote"}  onClick={() => this.props.votePost(-1, postDetails.id)} src={Down} width="20px"/>
           <form onSubmit={this.sendCommentData}>
             {commentForm.map( input => (
               <div key={input.name}>
@@ -72,20 +72,21 @@ class PostsDetails extends Component {
             ))}
             <button type="submit">Comentar</button>
           </form>
+          
           {postDetails.comments && postDetails.comments.map( comment => (
             <div key={comment.id}>
                 <p>{comment.username}</p>
                 <p>{comment.text}</p>
                 <p>{comment.votesCount}</p>
-                <img onClick={() => this.props.voteComment(+1, this.props.selectedPostId, comment.id)} src={Up} width="20px"/>
+                <img  alt={"vote"}  onClick={() => this.props.voteComment(+1, this.props.selectedPostId, comment.id)} src={Up} width="20px"/>
                 {/* <p>{comment.userVoteDirection}</p> */}
-                <img onClick={() => this.props.voteComment(-1, this.props.selectedPostId, comment.id)} src={Down} width="20px"/>
+                <img  alt={"vote"}  onClick={() => this.props.voteComment(-1, this.props.selectedPostId, comment.id)} src={Down} width="20px"/>
             </div>
           ))}
         </div>
     );
   }
-}
+}   
 
 const mapStateToProps = state => ({
     selectedPostId: state.posts.selectedPostId,

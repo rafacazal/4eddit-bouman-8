@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createUser } from "../../actions/user"
+import Header from '../../components/Header';
+import { StyledRegisterInput, RegisterCardWrapper, StyledRegisterButton } from '../../style/register';
 
 
 const registerForm = [
@@ -16,7 +18,6 @@ const registerForm = [
     type: "email",
     label: "Email - Admin",
     required: true,
-    pattern: "[A-Za-^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$]{3,}"
   },
   {
     name: "password",
@@ -49,10 +50,11 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <div>
-          <form onSubmit={this.sendRegisterData}>
+      <div> 
+      <Header/>
+          <RegisterCardWrapper  onSubmit={this.sendRegisterData}>
             {registerForm.map( input => (
-              <div key={input.name}>
+              <div key={StyledRegisterInput.name}>
                 <input
                 onChange={this.handleFieldChange}
                 name={input.name}
@@ -62,9 +64,9 @@ class RegisterPage extends Component {
                 />
               </div>
             ))}
-            <button type="submit" color="primary" size="large" onClick={this.sendRegisterData}>Login</button>
-          </form>
-      </div>
+            <StyledRegisterButton type="submit" color="primary" size="large" onClick={this.sendRegisterData}>cadastrar</StyledRegisterButton>
+          </RegisterCardWrapper>
+          </div>
     );
   }
 }

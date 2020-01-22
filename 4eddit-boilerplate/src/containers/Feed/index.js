@@ -79,9 +79,9 @@ class Feed extends Component {
         { this.props.allPosts.map(post => ( 
         <PostCard key={post.id} onClick={() => this.handleClickPost(post.id)}>
           <li> {post.title} </li>
-          <img onClick={() => this.props.votePost(+1, post.id)} src={Up} width="20px"/>
+          <img  alt={"vote"}  onClick={() => this.props.votePost(+1, post.id)} src={Up} width="20px"/>
           <p>{post.userVoteDirection}</p>
-          <img onClick={() => this.props.votePost(-1, post.id)} src={Down} width="20px"/>
+          <img alt={"vote"} onClick={() => this.props.votePost(-1, post.id)} src={Down} width="20px"/>
         </PostCard> 
         ))}
       </div>
