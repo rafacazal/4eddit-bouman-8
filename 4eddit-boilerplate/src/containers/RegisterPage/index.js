@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createUser } from "../../actions/user"
 import Header from '../../components/Header';
-import { StyledRegisterInput, RegisterCardWrapper, StyledRegisterButton } from '../../style/register';
+import RegisterCard from '../../components/RegisterCard'
+import { StyledRegisterInput, StyledRegisterButton } from '../../style/register';
 
 
 const registerForm = [
@@ -52,7 +53,7 @@ class RegisterPage extends Component {
     return (
       <div> 
       <Header/>
-          <RegisterCardWrapper  onSubmit={this.sendRegisterData}>
+          <RegisterCard  onSubmit={this.sendRegisterData}>
             {registerForm.map( input => (
               <div key={StyledRegisterInput.name}>
                 <input
@@ -65,7 +66,7 @@ class RegisterPage extends Component {
               </div>
             ))}
             <StyledRegisterButton type="submit" color="primary" size="large" onClick={this.sendRegisterData}>cadastrar</StyledRegisterButton>
-          </RegisterCardWrapper>
+          </RegisterCard>
           </div>
     );
   }

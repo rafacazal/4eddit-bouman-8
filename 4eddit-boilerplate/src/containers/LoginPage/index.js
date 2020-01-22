@@ -4,7 +4,8 @@ import { autenticateLogin } from "../../actions/user"
 import Header from '../../components/Header';
 import LoginFooter from '../../components/LoginFooter'
 // import { RegisterButton } from '../../style/registerButton'; 
-import { StyledInput, LoginCardWrapper, StyledButton  } from '../../style/login';
+import { StyledInput, StyledButton  } from '../../style/login';
+import LoginCard from "../../components/LoginCard";
 
 const loginForm = [
   {
@@ -46,7 +47,7 @@ class LoginPage extends Component {
     return (
       <div>
         <Header/>
-          <LoginCardWrapper onSubmit={this.sendLoginData}> 
+          <LoginCard onSubmit={this.sendLoginData}> 
             {loginForm.map( input => (
               <div key={StyledInput.name}>
                 <StyledInput
@@ -60,7 +61,7 @@ class LoginPage extends Component {
               </div>
             ))}
             <StyledButton type="submit" color="primary" size="large" onClick={this.sendLoginData}>Login</StyledButton>
-          </LoginCardWrapper>
+          </LoginCard>
           <LoginFooter/>
       </div>
     );
