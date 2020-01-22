@@ -1,17 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-
-
-export const HeaderContainer = styled.header`
-    width: 100%;
-    height: 21vh;
-    background-color: #ED7F61;
-`
+import LogoHeader from '../../resources/logoheader.jpg'; 
+import { LogoStyled, HeaderContainer }  from '../../style/header';
+import { RegisterButton } from '../../style/registerButton'
 
 function Header(props) {
     return (    
     <HeaderContainer>
+        <LogoStyled src={LogoHeader} />
          {props.children}
+         <RegisterButton onClick={props.onClick}>Cadastre-se</RegisterButton>     
     </HeaderContainer>
     );
 }
