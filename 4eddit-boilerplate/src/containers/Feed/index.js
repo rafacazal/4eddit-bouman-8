@@ -71,9 +71,9 @@ class Feed extends Component {
           </form>
 
           { this.props.allPosts.map(post => ( 
+            
           <PostCard>
          <li> {post.title} </li>
-
           <img onClick={() => {this.props.votePost(+1, post.id)}} src={Up} width="20px"/>
           <p>{post.userVoteDirection}</p>
           <img onClick={() => {this.props.votePost(-1, post.id)}} src={Down} width="20px"/>
