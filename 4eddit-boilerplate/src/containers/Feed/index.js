@@ -73,7 +73,7 @@ class Feed extends Component {
 
 
   render() {
-    const { allPosts } = this.props
+    const { allPosts, votePost } = this.props
 
     return (
       <div>
@@ -100,13 +100,14 @@ class Feed extends Component {
           <PostCard 
           key={post.id} 
           onClick={() => this.handleClickPost(post.id)}
-          positiveVote={() => this.props.votePost(+1, post.id)}
-          negativeVote={() => this.props.votePost(-1, post.id)}
+          positiveVote={() => votePost(+1, post.id)}
+          negativeVote={() => votePost(-1, post.id)}
           totalVotes={post.votesCount}
           username={post.username}
           title={post.title}
           content={post.text}
           commentCount={post.commentsNumber}
+          voted={post.userVoteDirection}
           />
           ))}
         </FeedContainer>

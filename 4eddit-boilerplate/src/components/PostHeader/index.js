@@ -7,6 +7,7 @@ const ContainerPostHeader = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: initial;
+    height: auto;
 `  
 
 const Username = styled.p`
@@ -18,7 +19,7 @@ const Username = styled.p`
     letter-spacing: 0.75px;
     text-transform: lowercase;
     color: #000000;
-    margin: 1em 0;
+    margin: 1.5em 0;
 `
 
 const Title = styled.p`

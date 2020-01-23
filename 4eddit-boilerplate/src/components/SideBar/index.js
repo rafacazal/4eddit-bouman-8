@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import  Up  from "../../resources/up.png";
-import  Down  from "../../resources/down.png";
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 
 const ContainerSideBar = styled.div`
@@ -20,9 +20,19 @@ const ContainerSideBar = styled.div`
 function SideBar(props) {
     return (
         <ContainerSideBar>
-            <img onClick={props.positiveVote} src={Up} alt="Voto Positivo" width="32px"/>
+            <ArrowUpwardIcon 
+            color={props.voted === +1 ? "primary" : "default"}
+            onClick={props.positiveVote}  
+            alt="Voto Positivo" 
+            width="32px"
+            />
             <p>{props.totalVotes}</p>
-            <img onClick={props.negativeVote} src={Down} alt="Voto Positivo" width="32px"/>
+            <ArrowDownwardIcon 
+            color={props.voted === -1 ? "secondary" : "default"}
+            onClick={props.negativeVote} 
+            alt="Voto Negativo" 
+            width="32px"
+            />
         </ContainerSideBar>
     );
 }
