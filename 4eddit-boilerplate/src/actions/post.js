@@ -72,6 +72,7 @@ export const votePost = (direction, postId) => async (dispatch) => {
         await axios.put(`${BaseURL}/${postId}/vote`, voteData, axiosConfig );
         
         dispatch(getAllPosts());
+        dispatch(getPostDetails(postId));
     } catch(error) {
         window.alert("Ocorreu um erro ao tentar votar no post.");
     }

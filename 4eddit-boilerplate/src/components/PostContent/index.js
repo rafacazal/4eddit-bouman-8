@@ -11,15 +11,21 @@ const TextContent = styled.p`
     text-align: justify;
     letter-spacing: 0.75px;
     text-transform: lowercase;
-    margin-top: 40px;
-`  
+` 
+
+const ContainerContent = styled.div`
+    height: auto;
+    display: flex;
+    justify-content: initial;
+    align-items: center;
+`
 
 
 function PostContent(props) {
     return (
-        <div onClick={props.onClick}>
+        <ContainerContent onClick={props.onClick}>
             <TextContent>{props.content}</TextContent>
-        </div>
+        </ContainerContent>
     );
 }
 

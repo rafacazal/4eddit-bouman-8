@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getPostDetails, createComment, votePost, voteComment } from "../../actions/post";
-import  Up  from "../../resources/up.png";
-import  Down  from "../../resources/down.png";
 import { push } from "connected-react-router";
 import { routes } from "../Router/index"
-
+import Header from "../../components/Header"
+import PostDetailsCard from "../../components/PostDetailsCard";
+import PostComment from "../../components/PostComment";
+import CommentCard from "../../components/CommentCard"
+import { ContainerInput, TextField, CommentButton, PostDetailsContainer, ContainerComment } from "../../style/postDetails"
 
 
 const commentForm = [
@@ -57,41 +59,58 @@ class PostsDetails extends Component {
     this.setState({form: {}})
   }
 
+  sendCommentVote = (direction, postId, commentId ) => {
+    this.props.voteComment(direction, postId, commentId)
+  }
+
 
   render() {
-    const { postDetails, votePost } = this.props
+    const { postDetails, votePost, voteComment } = this.props
 
     return (
       <div>
-        <p>{postDetails.username}</p>
-        <p>{postDetails.text}</p>
-        <p>{postDetails.commentsNumber}</p>
-        <img onClick={() => votePost(+1, postDetails.id)} src={Up} width="20px"/>
-        <p>{postDetails.userVoteDirection}</p>
-        <img onClick={() => votePost(-1, postDetails.id)} src={Down} width="20px"/>
-        <form onSubmit={this.sendCommentData}>
-          {commentForm.map( input => (
-            <div key={input.name}>
-              <input
-              onChange={this.handleFieldChange}
-              name={input.name}
-              type={input.type}
-              label={input.label}
-              value={this.state.form[input.name] || ""}
-              />
-            </div>
-          ))}
-          <button type="submit">Comentar</button>
-        </form>
-        {postDetails.comments && postDetails.comments.map( comment => (
-          <div key={comment.id}>
-            <p>{comment.username}</p>
-            <p>{comment.text}</p>
-            <p>{comment.votesCount}</p>
-            <img onClick={() => this.props.voteComment(+1, this.props.selectedPostId, comment.id)} src={Up} width="20px"/>
-            <img onClick={() => this.props.voteComment(-1, this.props.selectedPostId, comment.id)} src={Down} width="20px"/>
-          </div>
-        ))}
+        <Header/>
+        <PostDetailsContainer>
+          <PostDetailsCard
+          key={postDetails && postDetails.id} 
+          positiveVote={() => votePost(+1, postDetails.id)}
+          negativeVote={() => votePost(-1, postDetails.id)}
+          totalVotes={postDetails && postDetails.votesCount}
+          username={postDetails && postDetails.username}
+          title={postDetails && postDetails.title}
+          content={postDetails && postDetails.text}
+          voted={postDetails && postDetails.userVoteDirection}
+          commentCount={postDetails && postDetails.commentsNumber}
+          >
+            <PostComment onSubmit={this.sendCommentData}>
+              {commentForm.map( input => (
+                <ContainerInput key={input.name}>
+                  <TextField
+                  onChange={this.handleFieldChange}
+                  name={input.name}
+                  type={input.type}
+                  label={input.label}
+                  value={this.state.form[input.name] || ""}
+                  />
+                </ContainerInput>
+              ))}
+              <CommentButton type="submit">Comentar</CommentButton>
+            </PostComment>
+            <ContainerComment>
+              {postDetails && postDetails.comments && postDetails.comments.map( comment => (
+                <CommentCard 
+                key={comment.id}
+                positiveVote={() => this.sendCommentVote(+1, postDetails.id, comment.id)}
+                negativeVote={() => this.sendCommentVote(-1, postDetails.id, comment.id)}
+                totalVotes={comment && comment.votesCount}
+                username={comment && comment.username}
+                content={comment && comment.text}
+                voted={comment && comment.userVoteDirection}
+                />
+              ))}
+            </ContainerComment>
+          </PostDetailsCard>
+        </PostDetailsContainer>
       </div>
     );
   }

@@ -7,8 +7,8 @@ const ContainerPostFooter = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    grid-column-start: 2;
-    grid-column-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
     grid-row-start: 3;
     grid-row-end: 3;
 `  
