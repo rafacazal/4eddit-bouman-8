@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import CommentIcon from '../../resources/comment-icon.png'
 
 
-
 const ContainerPostFooter = styled.div`
     display: flex;
     justify-content: flex-end;
@@ -13,6 +12,7 @@ const ContainerPostFooter = styled.div`
     grid-row-start: 3;
     grid-row-end: 3;
 `  
+
 
 const Text = styled.p`
     margin: 0 1em;

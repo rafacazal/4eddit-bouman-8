@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-
 const ContainerLoginCard = styled.form`
     display: flex;
     flex-direction: column;

@@ -6,7 +6,6 @@ import PostContent from '../PostContent';
 import PostFooter from '../PostFooter';
 
 
-
 const ContainerPostCard = styled.div`
     background: #EB9E89;
     width: 700px;

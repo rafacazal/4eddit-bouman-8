@@ -3,7 +3,6 @@ import styled from "styled-components";
 import logoHeader from "../../resources/logoheader.jpg";
 
 
-
 const HeaderContainer = styled.header`
     width: 100%;
     height: auto;

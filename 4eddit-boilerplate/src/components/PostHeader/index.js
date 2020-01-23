@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-
 const ContainerPostHeader = styled.div`
     display: flex;
     flex-direction: column;

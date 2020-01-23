@@ -7,8 +7,6 @@ import Feed from "../Feed";
 import PostDetails from "../PostDetails"
 
 
-
-
 export const routes = {
   root: "/",
   feed: "/feed",

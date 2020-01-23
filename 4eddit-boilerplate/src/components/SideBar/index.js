@@ -4,7 +4,6 @@ import  Up  from "../../resources/up.png";
 import  Down  from "../../resources/down.png";
 
 
-
 const ContainerSideBar = styled.div`
     display: flex;
     flex-direction: column;
@@ -16,7 +15,6 @@ const ContainerSideBar = styled.div`
     grid-row-end: 3;
     padding-top: 0.8em;
 `  
-
 
 
 function SideBar(props) {
