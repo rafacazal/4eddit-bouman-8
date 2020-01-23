@@ -1,18 +1,48 @@
 import React from 'react';
 import styled from 'styled-components';
+import SideBar from '../SideBar';
+import PostHeader from '../PostHeader';
+import PostContent from '../PostContent';
+import PostFooter from '../PostFooter';
 
-const ContainerFormCard = styled.div`
-    padding: 20px;
-    width: 300px;
-    border: 1px solid black;
-    color: black;  
+
+
+const ContainerPostCard = styled.div`
+    background: #EB9E89;
+    width: 700px;
+    height: 300px; 
+    border-radius: 20px; 
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    grid-auto-rows: 1fr 1fr 40px;
+    margin: 1em 0;
 `  
+
 
 function PostCard(props) {
     return (
-        <ContainerFormCard onClick={props.onClick}>
-            {props.children}
-        </ContainerFormCard>
+        <ContainerPostCard>
+            <SideBar 
+            positiveVote={props.positiveVote} 
+            negativeVote={props.negativeVote} 
+            totalVotes={props.totalVotes}/>
+            <PostHeader 
+            onClick={props.onClick}
+            username={props.username}
+            title={props.title} 
+            />
+            <PostContent
+            onClick={props.onClick}
+            content={props.content}
+            /> 
+            <PostFooter
+            onClick={props.onClick}
+            commentCount={props.commentCount}
+            />
+        </ContainerPostCard>
     );
 }
+ 
+
+
 export default PostCard;
