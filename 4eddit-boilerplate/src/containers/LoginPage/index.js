@@ -56,7 +56,7 @@ class LoginPage extends Component {
     return (
       <div>
         <Header>
-          <RegisterPageButton onClick={this.props.goToRegisterPage}>Cadastre-se</RegisterPageButton>
+        <RegisterPageButton onClick={this.props.goToRegisterPage}>Cadastre-se</RegisterPageButton>
         </Header>
         <LoginCard onSubmit={this.sendLoginData}>
           {loginForm.map( input => (
