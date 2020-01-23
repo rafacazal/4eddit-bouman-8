@@ -95,7 +95,7 @@ class PostsDetails extends Component {
       </div>
     );
   }
-}
+}   
 
 
 const mapStateToProps = state => ({

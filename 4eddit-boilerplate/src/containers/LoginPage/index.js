@@ -10,8 +10,6 @@ import LoginCard from "../../components/LoginCard";
 import { StyledInput, StyledButton, ContainerInput } from '../../style/loginPage';
 
 
-
-
 const loginForm = [
   {
     name: "email",
@@ -79,7 +77,6 @@ class LoginPage extends Component {
     );
   }
 }
-
 
 const mapDispatchToProps = dispatch => ({
   autenticateLogin: (email, password) => dispatch(autenticateLogin(email, password)),
