@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createUser } from "../../actions/user"
-import Header from '../../components/Header';
+import Header from "../../components/Header";
 import RegisterCard from '../../components/RegisterCard'
-import { StyledRegisterInput, StyledRegisterButton } from '../../style/register';
+import { StyledInput, StyledButton, CardTitle, ContainerInput } from '../../style/registerPage';
 
 
 const registerForm = [
@@ -12,12 +12,11 @@ const registerForm = [
     type: "text",
     label: "Nome de Usuário",
     required: true,
-    pattern: "[A-Za-z0-9]"
   },
   {
     name: "email",
     type: "email",
-    label: "Email - Admin",
+    label: "E-mail",
     required: true,
   },
   {
@@ -28,6 +27,7 @@ const registerForm = [
   }
 ]
 
+
 class RegisterPage extends Component {
   constructor(props) {
     super(props);
@@ -36,46 +36,53 @@ class RegisterPage extends Component {
     };
   }
 
+
   handleFieldChange = event => {
     const { name, value } = event.target;
-
     this.setState({ form: { ...this.state.form, [name]: value } });
   };
 
+
   sendRegisterData = (event) => {
     event.preventDefault()
-    const { email, password, username} = this.state.form
-    this.props.createUser(email, password, username)
+
+    const { createUser } = this.props
+    const { email, password, username } = this.state.form
+    createUser(email, password, username)
+
     this.setState({form: {}})
   }
 
+
   render() {
     return (
-      <div> 
-      <Header/>
-          <RegisterCard onSubmit={this.sendRegisterData}>
-            {registerForm.map( input => (
-              <div key={StyledRegisterInput.name}>
-                <input
-                onChange={this.handleFieldChange}
-                name={input.name}
-                type={input.type}
-                label={input.label}
-                value={this.state.form[input.name] || ""}
-                />
-              </div>
-            ))}
-            <StyledRegisterButton type="submit" color="primary" size="large" onClick={this.sendRegisterData}>cadastrar</StyledRegisterButton>
-          </RegisterCard>
-          </div>
+      <div>
+        <Header/>
+        <RegisterCard onSubmit={this.sendRegisterData}>
+          <CardTitle>Cadastro</CardTitle>
+          {registerForm.map( input => (
+            <ContainerInput key={input.name}>
+              <label>{input.label}</label>
+              <StyledInput
+              onChange={this.handleFieldChange}
+              name={input.name}
+              type={input.type}
+              value={this.state.form[input.name] || ""}
+              />
+            </ContainerInput>
+          ))}
+          <StyledButton type="submit" color="primary" size="large" onClick={this.sendRegisterData}>Cadastrar</StyledButton>
+        </RegisterCard>
+      </div>
     );
   }
 }
 
 
 const mapDispatchToProps = dispatch => ({
-    createUser: (email, password, username) => dispatch(createUser(email, password, username)),
+  createUser: (email, password, username) => dispatch(createUser(email, password, username)),
 })
+
 
 
 export default connect(null, mapDispatchToProps)(RegisterPage);

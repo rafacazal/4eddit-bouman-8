@@ -3,6 +3,7 @@ import { push } from "connected-react-router";
 import { routes } from "../containers/Router";
 
 
+const BaseURL = 'https://us-central1-missao-newton.cloudfunctions.net/fourEddit'
 
 
 export const autenticateLogin = (email, password) => async (dispatch) => {
@@ -12,17 +13,17 @@ export const autenticateLogin = (email, password) => async (dispatch) => {
     }
 
     try {
-        const response = await axios.post(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/login`, loginInformation);
+        const response = await axios.post(`${BaseURL}/login`, loginInformation);
         
         const userToken = response.data.token;
         window.localStorage.setItem("token", userToken);
         
         dispatch(push(routes.feed))
-
     } catch(error) {
-        window.alert("Ocorreu um erro ao tentar fazer login!")
+        window.alert("Ocorreu um erro ao tentar fazer login.")
     }
 }
+
 
 export const createUser = (email, password, username) => async (dispatch) => {
     const registerInformation = {
@@ -32,7 +33,7 @@ export const createUser = (email, password, username) => async (dispatch) => {
     }
 
     try {
-        const response = await axios.post(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/signup`, registerInformation);
+        const response = await axios.post(`${BaseURL}/signup`, registerInformation);
 
         const userToken = response.data.token;
         window.localStorage.setItem("token", userToken); 
@@ -41,8 +42,6 @@ export const createUser = (email, password, username) => async (dispatch) => {
 
         window.alert("registro realizado!")
     } catch(error) {
-        console.log(error)
         window.alert("Ocorreu um erro ao tentar se registrar.")
     }
-
 }

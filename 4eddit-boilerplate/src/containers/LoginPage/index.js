@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { autenticateLogin } from "../../actions/user"
-import Header from '../../components/Header';
-import LoginFooter from '../../components/LoginFooter'
-import { RegisterButton } from '../../style/registerButton'; 
-import { StyledInput, StyledButton  } from '../../style/login';
-import LoginCard from "../../components/LoginCard";
 import { push } from "connected-react-router";
-import { routes } from "../Router/index"
+import { routes } from "../Router/index";
+import { autenticateLogin } from "../../actions/user";
+import Header from '../../components/Header';
+import { RegisterPageButton } from '../../style/global'; 
+import LoginPageFooter from '../../components/LoginPageFooter';
+import LoginCard from "../../components/LoginCard";
+import { StyledInput, StyledButton, ContainerInput } from '../../style/loginPage';
+
 
 const loginForm = [
   {
     name: "email",
     type: "email",
     label: "E-mail ",
-    required: true,
+    required: true
   },
   {
     name: "password",
@@ -24,6 +25,7 @@ const loginForm = [
   }
 ]
 
+
 class LoginPage extends Component {
   constructor(props) {
     super(props);
@@ -32,39 +34,45 @@ class LoginPage extends Component {
     };
   }
 
+
   handleFieldChange = event => {
     const { name, value } = event.target;
-
     this.setState({ form: { ...this.state.form, [name]: value } });
   };
 
+
   sendLoginData = (event) => {
     event.preventDefault()
-    const { email, password} = this.state.form
-    this.props.autenticateLogin(email, password)
+
+    const { email, password } = this.state.form;
+    const { autenticateLogin } = this.props;
+    autenticateLogin(email, password)
+
     this.setState({form: {}})
   }
+
 
   render() {
     return (
       <div>
-        <Header> <RegisterButton onClick={this.props.goToRegisterPage}/> </Header>
-          <LoginCard onSubmit={this.sendLoginData}> 
-            {loginForm.map( input => (
-              <div key={StyledInput.name}>
-                <StyledInput
-                onChange={this.handleFieldChange}
-                name={input.name}
-                type={input.type}
-                placeholder={input.label}
-                label={input.label}
-                value={this.state.form[input.name] || ""}
-                />
-              </div>
-            ))}
-            <StyledButton type="submit" color="primary" size="large" onClick={this.sendLoginData}>Login</StyledButton>
-          </LoginCard>
-          <LoginFooter/>
+        <Header>
+          <RegisterPageButton onClick={this.props.goToRegisterPage}>Cadastre-se</RegisterPageButton>
+        </Header>
+        <LoginCard onSubmit={this.sendLoginData}>
+          {loginForm.map( input => (
+            <ContainerInput key={input.name}>
+              <label>{input.label}</label>
+              <StyledInput
+              onChange={this.handleFieldChange}
+              name={input.name}
+              type={input.type}
+              value={this.state.form[input.name] || ""}
+              />
+            </ContainerInput>
+          ))}
+          <StyledButton type="submit" onClick={this.sendLoginData}>Login</StyledButton>
+        </LoginCard>
+        <LoginPageFooter/>
       </div>
     );
   }
@@ -74,6 +82,7 @@ const mapDispatchToProps = dispatch => ({
   autenticateLogin: (email, password) => dispatch(autenticateLogin(email, password)),
   goToRegisterPage: () => dispatch(push(routes.register)),
 })
+
 
 
 export default connect(null, mapDispatchToProps)(LoginPage);

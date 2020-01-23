@@ -14,20 +14,22 @@ export const routes = {
   feed: "/feed",
   register: "/register",
   postDetails: "/details",
-  // Outras rotas aqui
 };
+
 
 function Router(props) {
   return (
     <ConnectedRouter history={props.history}>
       <Switch>
         <Route exact path={routes.root} component={LoginPage}/>
-        <Route exact path={routes.feed} component={Feed} /> 
-        <Route exact path={routes.register} component={RegisterPage} /> 
-        <Route exact path={routes.postDetails} component={PostDetails} /> 
+        <Route exact path={routes.register} component={RegisterPage}/> 
+        <Route exact path={routes.feed} component={Feed}/> 
+        <Route exact path={routes.postDetails} component={PostDetails}/> 
       </Switch>
     </ConnectedRouter>
   );
 }
+
+
 
 export default Router;
