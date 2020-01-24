@@ -10,6 +10,7 @@ import CommentCard from "../../components/CommentCard"
 import { ContainerInput, TextField, CommentButton, PostDetailsContainer, ContainerComment } from "../../style/postDetails"
 import { LoadingPage } from '../../components/LoadingPage';
 
+
 const commentForm = [
     {
       name: "text",
@@ -63,8 +64,9 @@ class PostsDetails extends Component {
     this.props.voteComment(direction, postId, commentId)
   }
 
+
   handleLoadingPage = () => {
-    if ( this.props.postDetails && this.props.postDetails.comments.length === 0) {
+    if (Object.keys(this.props.postDetails).length === 0) {
       return true
     } else {
       return false
@@ -78,6 +80,7 @@ class PostsDetails extends Component {
     return (
       <div>
         <Header/>
+        { this.handleLoadingPage() ? <LoadingPage/> :
         <PostDetailsContainer>
           <PostDetailsCard
           key={postDetails && postDetails.id} 
@@ -104,23 +107,21 @@ class PostsDetails extends Component {
               ))}
               <CommentButton type="submit">Comentar</CommentButton>
             </PostComment>
-
             <ContainerComment>
-
-            { this.handleLoadingPage() ? <LoadingPage/> : 
-                postDetails && postDetails.comments.map( comment => (
+              { postDetails && postDetails.comments && postDetails.comments.map( comment => (
                 <CommentCard 
-                  key={comment.id}
-                  positiveVote={() => this.sendCommentVote(+1, postDetails.id, comment.id)}
-                  negativeVote={() => this.sendCommentVote(-1, postDetails.id, comment.id)}
-                  totalVotes={comment && comment.votesCount}
-                  username={comment && comment.username}
-                  content={comment && comment.text}
-                  voted={comment && comment.userVoteDirection} />
+                key={comment.id}
+                positiveVote={() => this.sendCommentVote(+1, postDetails.id, comment.id)}
+                negativeVote={() => this.sendCommentVote(-1, postDetails.id, comment.id)}
+                totalVotes={comment && comment.votesCount}
+                username={comment && comment.username}
+                content={comment && comment.text}
+                voted={comment && comment.userVoteDirection} 
+                />
               ))}
             </ContainerComment>
           </PostDetailsCard>
-        </PostDetailsContainer>
+        </PostDetailsContainer>}
       </div>
     );
   }

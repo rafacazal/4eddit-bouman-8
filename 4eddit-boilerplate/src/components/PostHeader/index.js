@@ -20,6 +20,9 @@ const Username = styled.p`
     text-transform: lowercase;
     color: #000000;
     margin: 1.5em 0;
+    width:  auto;
+    max-width: 580px;
+    word-wrap: break-word;
 `
 
 const Title = styled.p`
@@ -31,6 +34,10 @@ const Title = styled.p`
     letter-spacing: 0.75px;
     text-transform: lowercase;
     color: #000000;
+    @media (max-width: 380px) {
+        font-size: 15px;
+        max-width: 95vw;
+    }
 `
 
 

@@ -16,6 +16,7 @@ const ContainerPostFooter = styled.div`
 
 const Text = styled.p`
     margin: 0 1em;
+    margin-right: 3.5em;
 `
 
 

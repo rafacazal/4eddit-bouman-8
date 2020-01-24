@@ -23,7 +23,7 @@ const Footer = styled.footer`
         right: 5%;
         top: 95%;
         bottom: 3%;
-
+    }
 ` 
 
 
