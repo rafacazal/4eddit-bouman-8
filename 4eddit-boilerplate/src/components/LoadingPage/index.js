@@ -4,33 +4,37 @@ import PugGif from '../../resources/loading.gif';
 
 
 const LoaderWrapper = styled.div`
-  position: absolute;
-  bottom: 60%;
-  left: 0;
-  right: 0;
-  width: 100vw;
-  height: 100vw;
+    width: 400px;
+    height: 300px;
 `
 const PugLoader = styled.img`
-width: 100px;
-height: 100px;
+width: 700px;
+height: 400px; 
+margin: 0 auto;
+height: auto;
+@media (max-width: 380px) {
+    width: 90vw;
+    margin-left: 3vw;
+}
 `
 
 const LoadingMessage = styled.p`
 font-family: 'Roboto', sans-serif;
 font-style: regular;
 font-weight: 500;
-font-size: 15px;
-line-height: 16px;
-text-align: center;
+font-size: 30px;
 letter-spacing: 0.75px;
-text-transform: uppercase;
 color: #ED7F61;
-mix-blend-mode: normal;
+
+@media (max-width: 380px) {
+    margin-top: 5vw;
+    margin-left: 3vw;
+}
+
 `
-export const Loader = () => (
+export const LoadingPage = () => (
   <LoaderWrapper>
-      <PugLoader alt="Pug Loader" src={PugGif}/>
-   <LoadingMessage>Carregando...</LoadingMessage>
+    <PugLoader alt="Pug Loader" src={PugGif}/>
+    <LoadingMessage>Carregando...</LoadingMessage>
   </LoaderWrapper>
 )

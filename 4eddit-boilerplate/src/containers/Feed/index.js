@@ -6,10 +6,9 @@ import { push } from "connected-react-router";
 import { routes } from "../Router/index"
 import PostFormCard from "../../components/PostFormCard"
 import { TextField, ButtonPost, FormPost, ContainerInput, FeedContainer } from "../../style/feed"
-import Header from '../../components/Header'
-import { LogOutButton } from '../../style/global'
-import LoadingPage from '../../components/LoadingPage'
-
+import Header from '../../components/Header';
+import { LogOutButton } from '../../style/global';
+import { LoadingPage } from '../../components/LoadingPage';
 
 const feedForm = [
   {
@@ -78,6 +77,14 @@ class Feed extends Component {
     goToPostDetails()
   }
 
+  handleLoadingPage = () => {
+    if ( this.props.allPosts.length === 0) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   render() {
     const { allPosts, votePost } = this.props
     return (
@@ -101,20 +108,22 @@ class Feed extends Component {
               <ButtonPost type="submit" onClick={this.sendPostData}>Postar</ButtonPost>
             </FormPost>
           </PostFormCard>
-          { allPosts.map(post => ( 
-          <PostCard 
-          key={post.id} 
-          onClick={() => this.handleClickPost(post.id)}
-          positiveVote={() => votePost(+1, post.id)}
-          negativeVote={() => votePost(-1, post.id)}
-          totalVotes={post.votesCount}
-          username={post.username}
-          title={post.title}
-          content={post.text}
-          commentCount={post.commentsNumber}
-          voted={post.userVoteDirection}
-          />
-          ))}
+          
+          { this.handleLoadingPage() ? <LoadingPage/> : 
+          allPosts.map(post => (
+            <PostCard 
+            key={post.id} 
+            onClick={() => this.handleClickPost(post.id)}
+            positiveVote={() => votePost(+1, post.id)}
+            negativeVote={() => votePost(-1, post.id)}
+            totalVotes={post.votesCount}
+            username={post.username}
+            title={post.title}
+            content={post.text}
+            commentCount={post.commentsNumber}
+            voted={post.userVoteDirection}
+            />
+            ))}
         </FeedContainer>
       </div>
     );
