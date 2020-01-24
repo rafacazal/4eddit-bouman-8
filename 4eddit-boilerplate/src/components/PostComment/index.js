@@ -18,7 +18,7 @@ const ContainerPostComment = styled.form`
         width: 95vw;
         margin-left: 1vw;
         border: 1px solid white;
-      }
+    }
 `  
 
 

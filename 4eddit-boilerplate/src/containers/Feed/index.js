@@ -78,7 +78,9 @@ class Feed extends Component {
   }
 
   handleLoadingPage = () => {
-    if ( this.props.allPosts.length === 0) {
+    const { allPosts } = this.props
+
+    if ( allPosts.length === 0) {
       return true
     } else {
       return false
@@ -86,10 +88,10 @@ class Feed extends Component {
   }
 
   render() {
-    const { allPosts, votePost } = this.props
+    const { allPosts, votePost, goToLoginPage } = this.props
     return (
       <div>
-        <Header onClick={this.props.goToLoginPage}><LogOutButton onClick={this.logOut}>Logout</LogOutButton></Header>
+        <Header onClick={goToLoginPage}><LogOutButton onClick={this.logOut}>Logout</LogOutButton></Header>
         <FeedContainer>       
           <PostFormCard>
             <FormPost onSubmit={this.sendPostData}>
@@ -108,9 +110,8 @@ class Feed extends Component {
               <ButtonPost type="submit" onClick={this.sendPostData}>Postar</ButtonPost>
             </FormPost>
           </PostFormCard>
-          
           { this.handleLoadingPage() ? <LoadingPage/> : 
-          allPosts.map(post => (
+            allPosts.map(post => (
             <PostCard 
             key={post.id} 
             onClick={() => this.handleClickPost(post.id)}

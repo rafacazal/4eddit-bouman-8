@@ -12,10 +12,13 @@ const TextContent = styled.p`
     letter-spacing: 0.75px;
     text-transform: lowercase;
     margin-right: 5vw;
+    width: auto;
+    word-wrap: break-word;
+    max-width: 580px;
     @media (max-width: 380px) {
         font-size: 15px;
+        max-width: 95vw;
     }
-
 ` 
 
 const ContainerContent = styled.div`

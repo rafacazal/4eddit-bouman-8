@@ -57,9 +57,10 @@ class RegisterPage extends Component {
 
 
   render() {
+    const { goToLoginPage } = this.props
     return (
       <div>
-        <Header onClick={this.props.goToLoginPage}></Header>
+        <Header onClick={goToLoginPage}></Header>
         <RegisterCard onSubmit={this.sendRegisterData}>
           <CardTitle>Cadastro</CardTitle>
           {registerForm.map( input => (
