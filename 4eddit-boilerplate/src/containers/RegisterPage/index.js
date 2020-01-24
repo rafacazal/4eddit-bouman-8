@@ -4,6 +4,8 @@ import { createUser } from "../../actions/user"
 import Header from "../../components/Header";
 import RegisterCard from '../../components/RegisterCard'
 import { StyledInput, StyledButton, CardTitle, ContainerInput } from '../../style/registerPage';
+import { push } from "connected-react-router";
+import { routes } from "../Router/index";
 
 
 const registerForm = [
@@ -57,7 +59,7 @@ class RegisterPage extends Component {
   render() {
     return (
       <div>
-        <Header/>
+        <Header onClick={this.props.goToLoginPage}></Header>
         <RegisterCard onSubmit={this.sendRegisterData}>
           <CardTitle>Cadastro</CardTitle>
           {registerForm.map( input => (
@@ -81,6 +83,7 @@ class RegisterPage extends Component {
 
 const mapDispatchToProps = dispatch => ({
   createUser: (email, password, username) => dispatch(createUser(email, password, username)),
+  goToLoginPage: () => dispatch(push(routes.root)),
 })
 
 

@@ -14,6 +14,11 @@ const ContainerCommentCard = styled.div`
     grid-template-columns: 50px 1fr;
     grid-auto-rows: 40px 1fr;
     margin: 1em 0;
+    @media (max-width: 780px) {
+        width: 95vw;
+        margin-left: 3vw;
+      }
+
 `  
 
 

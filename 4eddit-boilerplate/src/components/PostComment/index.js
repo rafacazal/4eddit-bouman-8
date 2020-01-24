@@ -14,6 +14,11 @@ const ContainerPostComment = styled.form`
     grid-column-end: 2;
     grid-row-start: 4;
     grid-row-end: 4;
+    @media (max-width: 780px) {
+        width: 95vw;
+        margin-left: 1vw;
+        border: 1px solid white;
+      }
 `  
 
 

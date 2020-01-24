@@ -15,6 +15,10 @@ const ContainerPostDetailsCard = styled.div`
     grid-auto-rows: auto 180px 40px auto;
     margin: 1em 0;
     height: auto; 
+    @media (max-width: 780px) {
+        width: 98vw;
+        margin-left: 3vw;
+      }
 `  
 
 

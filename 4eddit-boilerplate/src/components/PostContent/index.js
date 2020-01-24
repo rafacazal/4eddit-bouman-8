@@ -11,6 +11,11 @@ const TextContent = styled.p`
     text-align: justify;
     letter-spacing: 0.75px;
     text-transform: lowercase;
+    margin-right: 5vw;
+    @media (max-width: 380px) {
+        font-size: 15px;
+    }
+
 ` 
 
 const ContainerContent = styled.div`

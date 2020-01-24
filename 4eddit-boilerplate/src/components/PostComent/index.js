@@ -13,13 +13,14 @@ const ContainerLoginCard = styled.form`
     border-radius: 30px;
     width: 430px;
     height: auto;
-    @media (max-width: 380px) {
-        width: 80vw;
-    }
+    @media (max-width: 780px) {
+        width: 95vw;
+        margin-left: 3vw;
+      }
 `
 
 
-function LoginCard(props) {
+function PostComent(props) {
     return (    
         <ContainerLoginCard> 
             {props.children}
@@ -28,5 +29,4 @@ function LoginCard(props) {
 }
 
 
-
-export default LoginCard;
+export default PostComent;

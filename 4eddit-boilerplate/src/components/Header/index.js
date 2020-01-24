@@ -4,7 +4,7 @@ import logoHeader from "../../resources/logoheader.jpg";
 
 
 const HeaderContainer = styled.header`
-    width: 100%;
+    width: 100vw;
     height: auto;
     background-color: #ED7F61;
 `
@@ -12,10 +12,14 @@ const HeaderContainer = styled.header`
 const LogoHeader = styled.img`
     width: auto;
     height: 18vh;
+    @media (max-width: 380px) {
+        text-align: center;
+        margin-left: 17vw;
+    }
 `
 
 const PageContainer = styled.div`
-    width: 100%;
+    width: 100vw;
     height: 100%;
     background-color: #F5EBE7;
 `
@@ -25,7 +29,7 @@ function Header(props) {
     return (
         <PageContainer>
             <HeaderContainer>
-                <LogoHeader alt="Logo 4eddit" src={logoHeader} ></LogoHeader>
+                <LogoHeader onClick={props.onClick} alt="Logo 4eddit" src={logoHeader} ></LogoHeader>
                 {props.children}
             </HeaderContainer>
         </PageContainer>

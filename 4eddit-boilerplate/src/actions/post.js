@@ -120,7 +120,7 @@ export const getPostDetails = (postId) => async (dispatch) => {
     };
     
     try {       
-        const response = await axios.get(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/${postId}`,  axiosConfig );
+        const response = await axios.get(`${BaseURL}/${postId}`,  axiosConfig );
 
         dispatch(setPostDetails(response.data.post));
     } catch(error) {

@@ -16,6 +16,14 @@ const Footer = styled.footer`
     letter-spacing: 0.5px;
     text-transform: uppercase;
     color: #ED7F61;
+    
+    @media (max-width: 380px) {
+        position: absolute;
+        left: 20%;
+        right: 5%;
+        top: 95%;
+        bottom: 3%;
+
 ` 
 
 

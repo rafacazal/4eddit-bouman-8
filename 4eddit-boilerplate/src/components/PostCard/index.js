@@ -15,6 +15,10 @@ const ContainerPostCard = styled.div`
     grid-template-columns: 50px 1fr;
     grid-auto-rows: 1fr 1fr 40px;
     margin: 1em 0;
+    @media (max-width: 380px) {
+        width: 95vw;
+        margin-left: 3vw;
+    }
 `  
 
 

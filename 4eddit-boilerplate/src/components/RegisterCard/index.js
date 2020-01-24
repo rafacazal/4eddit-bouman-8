@@ -13,6 +13,9 @@ const ContainerRegisterCard = styled.form`
     border-radius: 30px;
     width: 430px;
     height: 500px;
+    @media (max-width: 780px) {
+        width: 80vw;
+      }
 `
 
 

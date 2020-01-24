@@ -2,6 +2,7 @@ const initialState = {
     allPosts: [],
     selectedPostId: "",
     postDetails: {},
+    
 }
 
 

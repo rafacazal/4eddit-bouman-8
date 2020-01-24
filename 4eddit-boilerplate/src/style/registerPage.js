@@ -46,9 +46,13 @@ export const StyledButton = styled.button`
     text-transform: uppercase;
     color: #000000;
     mix-blend-mode: normal;
-    opacity: 0.50;
+    opacity: 0.70;
     border-radius: 200px;
-    border: none;
+    border: 2px solid  #ED7F61;
+
+    @media (min-width: 340px) {
+        
+      }
 `
 
 export const ContainerInput = styled.div`

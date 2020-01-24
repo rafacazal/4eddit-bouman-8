@@ -12,10 +12,19 @@ const Footer = styled.footer`
     font-style: normal;
     font-size: 15px;
     line-height: 15px;
-    text-align: justify;
+    text-align: center;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     color: #ED7F61;
+
+    @media (max-width: 380px) {
+        position: absolute;
+        left: 20%;
+        right: 5%;
+        top: 98%;
+        bottom: 1%;
+
+    }
 ` 
 
 

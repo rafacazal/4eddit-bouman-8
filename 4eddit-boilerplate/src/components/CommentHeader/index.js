@@ -13,6 +13,9 @@ const ContainerCommentHeader = styled.div`
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 1;
+    @media (max-width: 780px) {
+        width: fit-content;
+      }
 `  
 
 const Username = styled.p`
