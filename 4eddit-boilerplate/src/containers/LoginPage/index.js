@@ -53,6 +53,8 @@ class LoginPage extends Component {
 
 
   render() {
+    const { goToRegisterPage } = this.props
+    
     return (
       <div>
         <Header>

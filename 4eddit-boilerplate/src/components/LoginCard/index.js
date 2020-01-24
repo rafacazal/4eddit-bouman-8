@@ -13,6 +13,9 @@ const ContainerLoginCard = styled.form`
     border-radius: 30px;
     width: 430px;
     height: auto;
+    @media (max-width: 380px) {
+        width: 80vw;
+    }
 `
 
 

@@ -5,6 +5,8 @@ export const TextField = styled.input`
     width: 100%;
     height: 100%;
     border: none; 
+    background-color: #F5EBE7;
+    border-radius: 4px;
     margin-bottom: 1em;
     font-size: auto;
     outline: none;
@@ -14,7 +16,7 @@ export const TextField = styled.input`
 export const ButtonPost = styled.button`
     background: #F5EBE7;
     border-radius: 200px;
-    border: none;
+    border: 2px solid  #EB9E89;
     padding: 7px 23px;
     font-weight: bold;
     align-self: flex-end;
